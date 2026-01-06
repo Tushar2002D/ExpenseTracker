@@ -10,24 +10,24 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
-  async function fetchUser() {   
-    setIsLoading(true);
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (res.ok) {
-      const user = await res.json();
-      dispatch(setUser(user));
-    }
-    setIsLoading(false);
-  }
-
   useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        const user = await res.json();
+        dispatch(setUser(user));
+      }
+      setIsLoading(false);
+    };
+
     fetchUser();
-  }, []);
+  }, [dispatch, token]);
 
   if (isLoading) {
     return <p>Loading...</p>;
