@@ -104,15 +104,26 @@ export default function TransactionForm({
   }
 
   return (
-    <Card sx={{ minWidth: 275, marginTop: 10 }}>
+    <Card
+      sx={{ minWidth: 275, marginTop: 10, width: { xs: "100%", sm: "auto" } }}
+    >
       <CardContent>
         <Typography variant="h6" sx={{ marginBottom: 2 }}>
           {editMode ? "Update Transaction" : "Add New Transaction"}
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex" }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 1,
+            alignItems: "center",
+          }}
+        >
           <TextField
             type="number"
-            sx={{ marginRight: 5 }}
+            sx={{ mr: { sm: 5 }, width: { xs: "100%", sm: "auto" } }}
             id="outlined-basic"
             label="Amount (in EUR)"
             name="amount"
@@ -123,7 +134,7 @@ export default function TransactionForm({
           />
           <TextField
             type="text"
-            sx={{ marginRight: 5 }}
+            sx={{ mr: { sm: 5 }, width: { xs: "100%", sm: "auto" } }}
             id="outlined-basic"
             label="Description"
             name="description"
@@ -139,7 +150,11 @@ export default function TransactionForm({
               value={form.date}
               onChange={handleDate}
               renderInput={(params) => (
-                <TextField sx={{ marginRight: 5 }} size="small" {...params} />
+                <TextField
+                  sx={{ mr: { sm: 5 }, width: { xs: "100%", sm: "auto" } }}
+                  size="small"
+                  {...params}
+                />
               )}
             />
           </LocalizationProvider>
@@ -154,25 +169,48 @@ export default function TransactionForm({
             getOptionLabel={(option) => option.label ?? ""}
             isOptionEqualToValue={(option, value) => option._id === value?._id}
             noOptionsText="No categories"
-            sx={{ width: 200, marginRight: 5 }}
+            sx={{ width: { xs: "100%", sm: 200 }, mr: { sm: 5 } }}
             renderInput={(params) => (
               <TextField {...params} size="small" label="Category" />
             )}
           />
-          {editMode ? (
-            <>
-              <Button type="submit" color="success" variant="outlined">
-                Update
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              flexDirection: { xs: "column", sm: "row" },
+              width: { xs: "100%", sm: "auto" },
+            }}
+          >
+            {editMode ? (
+              <>
+                <Button
+                  type="submit"
+                  color="success"
+                  variant="outlined"
+                  sx={{ width: { xs: "100%", sm: "auto" } }}
+                >
+                  Update
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={handleCancel}
+                  sx={{ width: { xs: "100%", sm: "auto" } }}
+                >
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <Button
+                type="submit"
+                color="success"
+                variant="contained"
+                sx={{ width: { xs: "100%", sm: "auto" } }}
+              >
+                Submit
               </Button>
-              <Button variant="secondary" onClick={handleCancel}>
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button type="submit" color="success" variant="contained">
-              Submit
-            </Button>
-          )}
+            )}
+          </Box>
         </Box>
       </CardContent>
     </Card>

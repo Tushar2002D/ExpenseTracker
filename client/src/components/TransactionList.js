@@ -26,9 +26,7 @@ export default function TransactionList({
     if (!user) {
       return "Loading";
     }
-    const category = user.categories.find(
-      (category) => category._id === id
-    );
+    const category = user.categories.find((category) => category._id === id);
     return category ? category.icon : "N/A";
   }
 
@@ -56,7 +54,7 @@ export default function TransactionList({
   return (
     <>
       <Typography variant="h6">List of Transactions</Typography>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>

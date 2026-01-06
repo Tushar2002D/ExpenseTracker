@@ -104,15 +104,26 @@ export default function CategoryForm({ editCategory, setEditCategory }) {
   }
 
   return (
-    <Card sx={{ minWidth: 275, marginTop: 10 }}>
+    <Card
+      sx={{ minWidth: 275, marginTop: 10, width: { xs: "100%", sm: "auto" } }}
+    >
       <CardContent>
         <Typography variant="h6" sx={{ marginBottom: 2 }}>
           Add New Category
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex" }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 1,
+            alignItems: "center",
+          }}
+        >
           <TextField
             type="text"
-            sx={{ marginRight: 5 }}
+            sx={{ mr: { sm: 5 }, width: { xs: "100%", sm: "auto" } }}
             id="outlined-basic"
             label="Label"
             name="label"
@@ -128,25 +139,48 @@ export default function CategoryForm({ editCategory, setEditCategory }) {
             }}
             id="icons"
             options={icons}
-            sx={{ width: 200, marginRight: 5 }}
+            sx={{ width: { xs: "100%", sm: 200 }, mr: { sm: 5 } }}
             renderInput={(params) => (
               <TextField {...params} size="small" label="Icon" />
             )}
           />
-          {editMode ? (
-            <>
-              <Button type="submit" color="success" variant="outlined">
-                Update
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              flexDirection: { xs: "column", sm: "row" },
+              width: { xs: "100%", sm: "auto" },
+            }}
+          >
+            {editMode ? (
+              <>
+                <Button
+                  type="submit"
+                  color="success"
+                  variant="outlined"
+                  sx={{ width: { xs: "100%", sm: "auto" } }}
+                >
+                  Update
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={handleCancel}
+                  sx={{ width: { xs: "100%", sm: "auto" } }}
+                >
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <Button
+                type="submit"
+                color="success"
+                variant="contained"
+                sx={{ width: { xs: "100%", sm: "auto" } }}
+              >
+                Submit
               </Button>
-              <Button variant="secondary" onClick={handleCancel}>
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button type="submit" color="success" variant="contained">
-              Submit
-            </Button>
-          )}
+            )}
+          </Box>
         </Box>
       </CardContent>
     </Card>

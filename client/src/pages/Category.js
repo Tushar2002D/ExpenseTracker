@@ -52,7 +52,7 @@ export default function Category() {
       <Typography variant="h6" sx={{ marginTop: 10 }}>
         List of Categories
       </Typography>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
